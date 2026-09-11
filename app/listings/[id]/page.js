@@ -1,96 +1,107 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { supabase } from "@/lib/supabaseClient";
+import { getListingById, formatPrice } from "@/lib/mockListings";
+import PhotoGallery from "@/app/components/PhotoGallery";
+import VerifiedBadge from "@/app/components/VerifiedBadge";
+import AmenityBadge from "@/app/components/AmenityBadge";
+import LandlordCard from "@/app/components/LandlordCard";
 import MapPlaceholder from "@/app/components/MapPlaceholder";
+import { BedIcon, BathIcon, RulerIcon, ChevronLeftIcon } from "@/app/components/icons";
 
 // `[id]` in the folder name makes this a dynamic route: visiting
-// "/listings/abc-123" renders this page with params.id === "abc-123".
+// "/listings/1" renders this page with params.id === "1".
 export default async function ListingDetailPage({ params }) {
   const { id } = await params;
+  const listing = getListingById(id);
 
-  const { data: listing, error } = await supabase
-    .from("listings")
-    .select("*")
-    .eq("id", id)
-    .single();
-
-  // If the id doesn't match any row, show Next.js's built-in 404 page.
-  if (error || !listing) {
+  if (!listing) {
     notFound();
   }
 
-  const photos = listing.photos?.length ? listing.photos : [null];
-
   return (
-    <main className="mx-auto w-full max-w-4xl px-4 py-10">
-      <Link href="/" className="text-sm text-zinc-500 hover:underline">
-        &larr; Back to listings
+    <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
+      <Link
+        href="/"
+        className="inline-flex items-center gap-1 text-sm text-brand-sage hover:text-brand-cream"
+      >
+        <ChevronLeftIcon className="h-4 w-4" />
+        Back to listings
       </Link>
 
-      <h1 className="mt-2 text-3xl font-bold text-zinc-900">
-        {listing.title}
-      </h1>
-      <p className="text-zinc-500">{listing.location}</p>
-      <p className="mt-2 text-xl font-semibold text-zinc-900">
-        ${listing.price} / month
-      </p>
-
-      <div className="mt-6 grid gap-2 sm:grid-cols-2">
-        {photos.map((photo, index) => (
-          <div
-            key={index}
-            className="aspect-video overflow-hidden rounded-lg bg-zinc-100"
-          >
-            {photo ? (
-              <img
-                src={photo}
-                alt={`${listing.title} photo ${index + 1}`}
-                className="h-full w-full object-cover"
-              />
-            ) : (
-              <div className="flex h-full items-center justify-center text-sm text-zinc-400">
-                No photo yet
-              </div>
-            )}
+      <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-2xl font-bold tracking-tight text-brand-cream sm:text-3xl">
+              {listing.title}
+            </h1>
+            {listing.verified && <VerifiedBadge />}
           </div>
-        ))}
+          <p className="mt-1 text-brand-sage">
+            {listing.location} · {listing.walkMinutes} min walk to {listing.school}
+          </p>
+        </div>
+        <p className="text-2xl font-bold text-brand-cream">
+          {formatPrice(listing.price)}
+          <span className="text-base font-normal text-brand-sage"> / month</span>
+        </p>
       </div>
 
-      {listing.description && (
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold text-zinc-900">
-            About this place
-          </h2>
-          <p className="mt-2 whitespace-pre-line text-zinc-700">
-            {listing.description}
-          </p>
-        </section>
-      )}
+      <div className="mt-6">
+        <PhotoGallery title={listing.title} baseSeed={listing.gradient} />
+      </div>
 
-      {listing.amenities?.length > 0 && (
-        <section className="mt-8">
-          <h2 className="text-xl font-semibold text-zinc-900">Amenities</h2>
-          <ul className="mt-2 flex flex-wrap gap-2">
-            {listing.amenities.map((amenity) => (
-              <li
-                key={amenity}
-                className="rounded-full bg-zinc-100 px-3 py-1 text-sm text-zinc-700"
-              >
-                {amenity}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
+      <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <div className="flex flex-wrap gap-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm backdrop-blur-sm">
+            <div className="flex items-center gap-2 text-brand-sage">
+              <BedIcon className="h-4 w-4 text-brand-mint" />
+              {listing.bedrooms} bedroom{listing.bedrooms > 1 ? "s" : ""}
+            </div>
+            <div className="flex items-center gap-2 text-brand-sage">
+              <BathIcon className="h-4 w-4 text-brand-mint" />
+              {listing.bathrooms} bathroom{listing.bathrooms > 1 ? "s" : ""}
+            </div>
+            <div className="flex items-center gap-2 text-brand-sage">
+              <RulerIcon className="h-4 w-4 text-brand-mint" />
+              {listing.sqm} sqm
+            </div>
+          </div>
 
-      <section className="mt-8">
-        <h2 className="text-xl font-semibold text-zinc-900">Location</h2>
-        <MapPlaceholder
-          lat={listing.lat}
-          lng={listing.lng}
-          location={listing.location}
-        />
-      </section>
+          <section className="mt-8">
+            <h2 className="text-lg font-bold tracking-tight text-brand-cream">
+              About this place
+            </h2>
+            <p className="mt-2 whitespace-pre-line leading-relaxed text-brand-sage">
+              {listing.description}
+            </p>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-lg font-bold tracking-tight text-brand-cream">Amenities</h2>
+            <div className="mt-3 flex flex-wrap gap-2">
+              {listing.amenities.map((amenity) => (
+                <AmenityBadge key={amenity} name={amenity} size="md" />
+              ))}
+            </div>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-lg font-bold tracking-tight text-brand-cream">Location</h2>
+            <MapPlaceholder
+              location={listing.location}
+              school={listing.school}
+              walkMinutes={listing.walkMinutes}
+              pin={listing.pin}
+            />
+          </section>
+        </div>
+
+        <div className="lg:col-span-1">
+          <div className="lg:sticky lg:top-24">
+            <LandlordCard landlord={listing.landlord} />
+          </div>
+        </div>
+      </div>
     </main>
   );
 }
