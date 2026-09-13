@@ -210,11 +210,11 @@ function ComparisonBody({ listings, ids }) {
         {listings.map((listing) => (
           <div
             key={listing.id}
-            className="rounded-2xl border border-brand-orange/30 bg-brand-orange/10 p-5"
+            className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
           >
-            <p className="text-xs font-semibold uppercase tracking-wide text-brand-orange">
+            <span className="inline-flex items-center rounded-full bg-brand-orange/15 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-brand-orange ring-1 ring-brand-orange/30">
               {verdict.bestFor[listing.id]}
-            </p>
+            </span>
             <Link
               href={`/listings/${listing.id}`}
               className="mt-1 block font-semibold text-brand-cream hover:underline"

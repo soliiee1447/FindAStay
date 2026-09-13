@@ -1,28 +1,38 @@
 import { HouseIcon } from "@/app/components/icons";
 
 // Stand-in for a real listing photo. Entirely CSS (no network image
-// requests), so the demo works offline. `seed` picks one of the brand's
-// moody teal/orange/mint duotone gradients so every "photo" still reads as
-// on-brand instead of a generic rainbow of pastel placeholders.
-const GRADIENTS = [
-  "from-brand-teal-900 via-brand-teal-800 to-brand-orange/70",
-  "from-brand-teal-950 via-brand-teal-800 to-brand-mint/50",
-  "from-brand-orange/80 via-brand-teal-900 to-brand-teal-950",
-  "from-brand-mint/60 via-brand-teal-900 to-brand-teal-950",
-  "from-brand-teal-800 via-brand-teal-900 to-brand-orange/60",
-  "from-brand-teal-950 via-brand-orange/40 to-brand-mint/40",
-  "from-brand-mint/50 via-brand-teal-950 to-brand-orange/50",
+// requests), so the demo works offline. Each card sits on the brand's deep
+// teal base with a single soft orange or mint glow — an accent, not a
+// full-bleed color wash — so orange/mint stay highlight colors even though
+// this block repeats across every card in the grid.
+const GLOW_POSITIONS = [
+  "at 85% 15%",
+  "at 15% 85%",
+  "at 85% 85%",
+  "at 15% 15%",
+  "at 50% 0%",
+  "at 90% 55%",
+  "at 10% 55%",
 ];
 
+const GLOW_COLORS = ["#E8763C", "#3DD9C4"];
+
 export default function PhotoPlaceholder({ seed = 0, className = "" }) {
-  const gradient = GRADIENTS[Math.abs(seed) % GRADIENTS.length];
+  const position = GLOW_POSITIONS[Math.abs(seed) % GLOW_POSITIONS.length];
+  const color = GLOW_COLORS[Math.abs(seed) % GLOW_COLORS.length];
 
   return (
     <div
-      className={`relative flex items-center justify-center overflow-hidden bg-gradient-to-br ${gradient} ${className}`}
+      className={`relative flex items-center justify-center overflow-hidden bg-brand-teal-900 ${className}`}
     >
-      <div className="absolute inset-0 bg-brand-teal-950/10" />
-      <HouseIcon className="relative h-10 w-10 text-brand-cream/60" />
+      <div
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `radial-gradient(circle ${position}, ${color}4d, transparent 55%)`,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-brand-teal-950/50" />
+      <HouseIcon className="relative h-10 w-10 text-brand-cream/50" />
     </div>
   );
 }

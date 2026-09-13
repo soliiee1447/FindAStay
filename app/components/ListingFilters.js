@@ -80,7 +80,7 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
               onClick={() => toggleAmenity(amenity)}
               className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
                 active
-                  ? "border-brand-orange bg-brand-orange text-brand-teal-950"
+                  ? "border-brand-orange bg-brand-orange/15 text-brand-orange"
                   : "border-white/15 bg-white/5 text-brand-sage hover:border-white/30 hover:text-brand-cream"
               }`}
             >

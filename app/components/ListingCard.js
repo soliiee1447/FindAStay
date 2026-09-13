@@ -45,7 +45,7 @@ export default function ListingCard({
         aria-pressed={selected}
         className={`absolute right-2.5 top-2.5 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm ring-1 backdrop-blur-sm transition-colors ${
           selected
-            ? "bg-brand-orange text-brand-teal-950 ring-brand-orange"
+            ? "bg-brand-orange/15 text-brand-orange ring-brand-orange/60"
             : compareDisabled
               ? "cursor-not-allowed bg-brand-teal-950/50 text-brand-sage-dim ring-white/10"
               : "bg-brand-teal-950/60 text-brand-cream ring-white/15 hover:bg-brand-teal-950/80"
@@ -53,7 +53,7 @@ export default function ListingCard({
       >
         <span
           className={`flex h-3.5 w-3.5 items-center justify-center rounded-sm border ${
-            selected ? "border-brand-teal-950 bg-brand-teal-950/20" : "border-brand-sage"
+            selected ? "border-brand-orange bg-brand-orange/20" : "border-brand-sage"
           }`}
         >
           {selected && (

@@ -12,13 +12,13 @@ const ICON_SIZES = {
   lg: "h-4 w-4",
 };
 
-// The trust signal for the pitch: a filled mint pill with a checkmark badge
-// icon, dark-teal text so it reads as a confident stamp rather than a
-// generic green "ok" chip.
+// The trust signal for the pitch: mint as an accent (icon + text + thin
+// border) on a dark glass pill, rather than a solid mint fill — keeps mint
+// a highlight color instead of a dominant block repeated across every card.
 export default function VerifiedBadge({ size = "md", label = "Verified" }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full bg-brand-mint font-semibold text-brand-teal-950 shadow-[0_0_12px_rgba(61,217,196,0.35)] ${SIZES[size]}`}
+      className={`inline-flex items-center rounded-full border border-brand-mint/40 bg-brand-teal-950/70 font-semibold text-brand-mint backdrop-blur-sm ${SIZES[size]}`}
     >
       <CheckBadgeIcon className={ICON_SIZES[size]} />
       {label}
