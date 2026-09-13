@@ -3,6 +3,7 @@
 import Link from "next/link";
 import LogoMark from "@/app/components/Logo";
 import { useAuth } from "@/app/AuthContext";
+import { SearchIcon, UserIcon } from "@/app/components/icons";
 
 export default function Header() {
   const { loggedIn, role, name, logout, hydrated } = useAuth();
@@ -23,55 +24,66 @@ export default function Header() {
     .slice(0, 2);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-white/10 bg-brand-teal-950/70 backdrop-blur-md">
-      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5">
+    <header className="sticky top-0 z-40 border-b border-brand-line bg-brand-bg">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 items-center px-4 py-4 sm:grid-cols-[1fr_auto_1fr] sm:px-6">
+        <Link href="/" className="flex items-center gap-2">
           <LogoMark />
-          <span className="text-lg font-bold tracking-tight text-brand-cream">
+          <span className="font-serif text-lg font-semibold tracking-tight text-brand-ink">
             FindAStay
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-sm font-medium text-brand-sage sm:flex">
-          <Link href="/" className="transition-colors hover:text-brand-cream">
+        <nav className="hidden items-center justify-center gap-8 text-sm font-medium uppercase tracking-wide text-brand-ink-soft sm:flex">
+          <Link href="/" className="transition-colors hover:text-brand-ink">
             Browse
           </Link>
-          <Link href="/compare" className="transition-colors hover:text-brand-cream">
+          <Link href="/compare" className="transition-colors hover:text-brand-ink">
             Compare
           </Link>
           {loggedIn && role === "landlord" && (
-            <Link href="/landlord" className="transition-colors hover:text-brand-cream">
+            <Link href="/landlord" className="transition-colors hover:text-brand-ink">
               Dashboard
             </Link>
           )}
         </nav>
 
-        {!hydrated ? (
-          <div className="h-9 w-20" />
-        ) : loggedIn ? (
-          <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-2 sm:flex">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-brand-cream text-xs font-bold text-brand-teal-950">
+        <div className="flex items-center justify-end gap-4">
+          <Link
+            href="/#listings"
+            aria-label="Search listings"
+            className="text-brand-ink-soft transition-colors hover:text-brand-ink"
+          >
+            <SearchIcon className="h-5 w-5" />
+          </Link>
+
+          {!hydrated ? (
+            <div className="h-5 w-5" />
+          ) : loggedIn ? (
+            <div className="flex items-center gap-2.5">
+              <span
+                title={name}
+                className="hidden h-7 w-7 items-center justify-center bg-brand-ink text-[11px] font-semibold text-white sm:flex"
+              >
                 {initials || "?"}
               </span>
-              <span className="text-sm text-brand-sage">{name}</span>
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="text-sm font-medium text-brand-ink-soft underline-offset-4 transition-colors hover:text-brand-ink hover:underline"
+              >
+                Log out
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={handleLogout}
-              className="rounded-full border border-white/15 px-4 py-2 text-sm font-medium text-brand-sage transition-colors hover:border-white/30 hover:text-brand-cream"
+          ) : (
+            <Link
+              href="/login"
+              aria-label="Log in"
+              className="text-brand-ink-soft transition-colors hover:text-brand-ink"
             >
-              Log out
-            </button>
-          </div>
-        ) : (
-          <Link
-            href="/login"
-            className="rounded-full bg-brand-cream px-4 py-2 text-sm font-semibold text-brand-teal-950 transition-transform hover:scale-105"
-          >
-            Log In
-          </Link>
-        )}
+              <UserIcon className="h-5 w-5" />
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );

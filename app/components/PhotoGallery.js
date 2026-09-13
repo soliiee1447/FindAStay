@@ -9,7 +9,7 @@ export default function PhotoGallery({ title, baseSeed, count = 4 }) {
 
   return (
     <div>
-      <div className="aspect-video w-full overflow-hidden rounded-xl">
+      <div className="aspect-video w-full border border-brand-line">
         <PhotoPlaceholder seed={seeds[active]} className="h-full w-full" />
       </div>
       <div className="mt-2 grid grid-cols-4 gap-2">
@@ -20,8 +20,10 @@ export default function PhotoGallery({ title, baseSeed, count = 4 }) {
             onClick={() => setActive(index)}
             aria-label={`Show photo ${index + 1} of ${title}`}
             aria-pressed={active === index}
-            className={`aspect-video overflow-hidden rounded-lg transition-opacity ${
-              active === index ? "ring-2 ring-brand-orange" : "opacity-60 hover:opacity-100"
+            className={`aspect-video border transition-colors ${
+              active === index
+                ? "border-brand-ink"
+                : "border-brand-line opacity-60 hover:opacity-100"
             }`}
           >
             <PhotoPlaceholder seed={seed} className="h-full w-full" />

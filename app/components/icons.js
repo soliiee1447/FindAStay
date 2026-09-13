@@ -236,6 +236,15 @@ export function PlusIcon({ className }) {
   );
 }
 
+export function SearchIcon({ className }) {
+  return (
+    <svg {...base({ className })}>
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="M20 20l-4.3-4.3" />
+    </svg>
+  );
+}
+
 export function HouseIcon({ className }) {
   return (
     <svg {...base({ className })}>

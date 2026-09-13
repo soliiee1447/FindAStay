@@ -1,10 +1,15 @@
-import { Outfit } from "next/font/google";
+import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "@/app/AuthContext";
 import Header from "@/app/components/Header";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -19,8 +24,8 @@ export const metadata = {
 // for things that should appear on every page (fonts, global styles, header).
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${outfit.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col font-sans text-brand-cream">
+    <html lang="en" className={`${playfair.variable} ${inter.variable} h-full antialiased`}>
+      <body className="flex min-h-full flex-col bg-brand-bg font-sans text-brand-ink">
         <AuthProvider>
           <Header />
           {children}

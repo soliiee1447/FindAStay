@@ -1,6 +1,9 @@
 import { allAmenities } from "@/lib/mockListings";
 import { XIcon } from "@/app/components/icons";
 
+const INPUT_CLASS =
+  "mt-1.5 border border-brand-line bg-white px-4 py-2 text-sm text-brand-ink placeholder:text-brand-muted outline-none focus:border-brand-ink";
+
 // Fully controlled by the parent (app/page.js) — filtering happens
 // client-side against the mock data, no navigation/query strings involved.
 export default function ListingFilters({ filters, onChange, onClear, resultCount, hasActiveFilters }) {
@@ -12,10 +15,10 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:p-5">
+    <div className="border border-brand-line bg-white p-4 sm:p-5">
       <div className="flex flex-wrap items-end gap-4">
         <div className="flex min-w-[180px] flex-1 flex-col">
-          <label htmlFor="location" className="text-sm font-medium text-brand-cream">
+          <label htmlFor="location" className="text-sm font-medium text-brand-ink">
             Location or campus
           </label>
           <input
@@ -24,12 +27,12 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
             value={filters.location}
             onChange={(e) => onChange({ location: e.target.value })}
             placeholder="e.g. Ateneo, USeP, Matina"
-            className="mt-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange"
+            className={INPUT_CLASS}
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="minPrice" className="text-sm font-medium text-brand-cream">
+          <label htmlFor="minPrice" className="text-sm font-medium text-brand-ink">
             Min price
           </label>
           <input
@@ -39,12 +42,12 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
             value={filters.minPrice}
             onChange={(e) => onChange({ minPrice: e.target.value })}
             placeholder="₱0"
-            className="mt-1.5 w-24 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange"
+            className={`${INPUT_CLASS} w-24`}
           />
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="maxPrice" className="text-sm font-medium text-brand-cream">
+          <label htmlFor="maxPrice" className="text-sm font-medium text-brand-ink">
             Max price
           </label>
           <input
@@ -54,7 +57,7 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
             value={filters.maxPrice}
             onChange={(e) => onChange({ maxPrice: e.target.value })}
             placeholder="₱8,000"
-            className="mt-1.5 w-24 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange"
+            className={`${INPUT_CLASS} w-24`}
           />
         </div>
 
@@ -62,7 +65,7 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
           <button
             type="button"
             onClick={onClear}
-            className="flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium text-brand-sage hover:bg-white/5 hover:text-brand-cream"
+            className="flex items-center gap-1 px-3 py-2 text-sm font-medium text-brand-ink-soft hover:text-brand-ink"
           >
             <XIcon className="h-3.5 w-3.5" />
             Clear all
@@ -78,10 +81,10 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
               key={amenity}
               type="button"
               onClick={() => toggleAmenity(amenity)}
-              className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`border px-3 py-1.5 text-sm font-medium transition-colors ${
                 active
-                  ? "border-brand-orange bg-brand-orange/15 text-brand-orange"
-                  : "border-white/15 bg-white/5 text-brand-sage hover:border-white/30 hover:text-brand-cream"
+                  ? "border-brand-orange bg-brand-orange-tint text-brand-orange"
+                  : "border-brand-line bg-white text-brand-ink-soft hover:border-brand-ink-soft hover:text-brand-ink"
               }`}
             >
               {amenity}
@@ -90,7 +93,7 @@ export default function ListingFilters({ filters, onChange, onClear, resultCount
         })}
       </div>
 
-      <p className="mt-4 text-sm text-brand-sage-dim">
+      <p className="mt-4 text-sm text-brand-muted">
         {resultCount} {resultCount === 1 ? "listing" : "listings"} found
       </p>
     </div>

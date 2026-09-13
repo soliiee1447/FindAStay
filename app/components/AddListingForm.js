@@ -56,11 +56,8 @@ export default function AddListingForm({ onSubmit, onCancel }) {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="mt-4 rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
-    >
-      <h3 className="text-sm font-semibold text-brand-cream">New listing</h3>
+    <form onSubmit={handleSubmit} className="mt-4 border border-brand-line bg-white p-5">
+      <h3 className="text-sm font-semibold text-brand-ink">New listing</h3>
 
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
         <Field label="Title" htmlFor="title">
@@ -132,7 +129,7 @@ export default function AddListingForm({ onSubmit, onCancel }) {
       </div>
 
       <div className="mt-4">
-        <p className="text-sm font-medium text-brand-cream">Amenities</p>
+        <p className="text-sm font-medium text-brand-ink">Amenities</p>
         <div className="mt-2 flex flex-wrap gap-2">
           {allAmenities.map((amenity) => {
             const active = form.amenities.includes(amenity);
@@ -141,10 +138,10 @@ export default function AddListingForm({ onSubmit, onCancel }) {
                 key={amenity}
                 type="button"
                 onClick={() => toggleAmenity(amenity)}
-                className={`rounded-full border px-3 py-1.5 text-sm font-medium transition-colors ${
+                className={`border px-3 py-1.5 text-sm font-medium transition-colors ${
                   active
-                    ? "border-brand-orange bg-brand-orange/15 text-brand-orange"
-                    : "border-white/15 bg-white/5 text-brand-sage hover:border-white/30 hover:text-brand-cream"
+                    ? "border-brand-orange bg-brand-orange-tint text-brand-orange"
+                    : "border-brand-line bg-white text-brand-ink-soft hover:border-brand-ink-soft hover:text-brand-ink"
                 }`}
               >
                 {amenity}
@@ -157,14 +154,14 @@ export default function AddListingForm({ onSubmit, onCancel }) {
       <div className="mt-5 flex items-center gap-3">
         <button
           type="submit"
-          className="rounded-full bg-brand-cream px-5 py-2.5 text-sm font-semibold text-brand-teal-950 transition-transform hover:scale-105"
+          className="bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
         >
           Publish listing
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="text-sm font-medium text-brand-sage hover:text-brand-cream"
+          className="text-sm font-medium text-brand-ink-soft hover:text-brand-ink"
         >
           Cancel
         </button>
@@ -174,12 +171,12 @@ export default function AddListingForm({ onSubmit, onCancel }) {
 }
 
 const INPUT_CLASS =
-  "mt-1.5 w-full rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange";
+  "mt-1.5 w-full border border-brand-line bg-white px-4 py-2.5 text-sm text-brand-ink placeholder:text-brand-muted outline-none focus:border-brand-ink";
 
 function Field({ label, htmlFor, children }) {
   return (
     <div className="flex flex-col">
-      <label htmlFor={htmlFor} className="text-sm font-medium text-brand-cream">
+      <label htmlFor={htmlFor} className="text-sm font-medium text-brand-ink">
         {label}
       </label>
       {children}

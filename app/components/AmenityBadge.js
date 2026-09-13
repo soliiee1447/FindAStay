@@ -6,9 +6,9 @@ export default function AmenityBadge({ name, size = "sm" }) {
 
   return (
     <span
-      className={`inline-flex items-center rounded-full border border-white/10 bg-white/5 text-brand-sage ${padding}`}
+      className={`inline-flex items-center border border-brand-line text-brand-ink-soft ${padding}`}
     >
-      {renderAmenityIcon(name, `${iconSize} text-brand-mint`)}
+      {renderAmenityIcon(name, `${iconSize} text-brand-green`)}
       {name}
     </span>
   );

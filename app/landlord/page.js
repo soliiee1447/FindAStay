@@ -31,7 +31,11 @@ export default function LandlordDashboardPage() {
   }, [hydrated, loggedIn, role, router]);
 
   if (!hydrated || !loggedIn || role !== "landlord") {
-    return <main className="mx-auto w-full max-w-6xl px-4 py-16 text-center text-brand-sage">Loading…</main>;
+    return (
+      <main className="mx-auto w-full max-w-6xl px-4 py-16 text-center text-brand-ink-soft">
+        Loading…
+      </main>
+    );
   }
 
   function handleNewListing(listing) {
@@ -43,18 +47,18 @@ export default function LandlordDashboardPage() {
 
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-8 sm:py-10">
-      <h1 className="text-2xl font-bold tracking-tight text-brand-cream sm:text-3xl">
+      <h1 className="font-serif text-3xl text-brand-ink sm:text-4xl">
         Welcome back, {currentLandlord.name.split(" ")[0]}
       </h1>
-      <p className="mt-1 text-brand-sage">
+      <p className="mt-1 text-brand-ink-soft">
         Here&apos;s how your listings on FindAStay are doing.
       </p>
 
       <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
         <StatCard label="Total listings" value={entries.length} />
         <StatCard label="Active bookings" value={currentLandlord.activeBookings} />
-        <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-          <p className="text-sm text-brand-sage">Profile verification</p>
+        <div className="border border-brand-line bg-white p-5">
+          <p className="text-sm text-brand-ink-soft">Profile verification</p>
           <div className="mt-2">
             <StatusTag status={currentLandlord.verificationStatus} />
           </div>
@@ -63,15 +67,15 @@ export default function LandlordDashboardPage() {
 
       <div className="mt-10 flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-xl font-bold tracking-tight text-brand-cream">My Listings</h2>
-          <p className="mt-1 text-sm text-brand-sage">
+          <h2 className="font-serif text-2xl text-brand-ink">My Listings</h2>
+          <p className="mt-1 text-sm text-brand-ink-soft">
             {activeCount} active · {entries.length - activeCount} pending verification
           </p>
         </div>
         <button
           type="button"
           onClick={() => setShowForm((prev) => !prev)}
-          className="flex items-center gap-1.5 rounded-full bg-brand-cream px-4 py-2.5 text-sm font-semibold text-brand-orange transition-transform hover:scale-105"
+          className="flex items-center gap-1.5 bg-brand-green px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-green-dark"
         >
           <PlusIcon className="h-4 w-4" />
           {showForm ? "Close form" : "Add New Listing"}
@@ -93,9 +97,9 @@ export default function LandlordDashboardPage() {
 
 function StatCard({ label, value }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm">
-      <p className="text-sm text-brand-sage">{label}</p>
-      <p className="mt-1 text-3xl font-bold text-brand-cream">{value}</p>
+    <div className="border border-brand-line bg-white p-5">
+      <p className="text-sm text-brand-ink-soft">{label}</p>
+      <p className="mt-1 text-3xl font-bold text-brand-ink">{value}</p>
     </div>
   );
 }

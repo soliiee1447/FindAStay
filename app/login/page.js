@@ -40,31 +40,28 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-[calc(100vh-64px)] items-center justify-center px-4 py-12">
+    <main className="flex min-h-[calc(100vh-73px)] items-center justify-center px-4 py-12">
       <div className="w-full max-w-sm">
         <div className="flex flex-col items-center text-center">
-          <LogoMark className="h-14 w-14" />
-          <h1 className="mt-4 text-2xl font-bold tracking-tight text-brand-cream">
+          <LogoMark className="h-10 w-10" />
+          <h1 className="mt-4 font-serif text-3xl text-brand-ink">
             Log in to FindAStay
           </h1>
-          <p className="mt-1 text-sm text-brand-sage">
+          <p className="mt-1 text-sm text-brand-ink-soft">
             Demo login — no real account needed.
           </p>
         </div>
 
-        <form
-          onSubmit={handleSubmit}
-          className="mt-8 rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm"
-        >
-          <div className="grid grid-cols-2 gap-1 rounded-full border border-white/15 bg-white/5 p-1">
+        <form onSubmit={handleSubmit} className="mt-8 border border-brand-line bg-white p-6">
+          <div className="grid grid-cols-2 border border-brand-line">
             <button
               type="button"
               onClick={() => setSelectedRole("student")}
               aria-pressed={selectedRole === "student"}
-              className={`rounded-full px-3 py-2 text-sm font-semibold transition-colors ${
+              className={`px-3 py-2.5 text-sm font-semibold transition-colors ${
                 selectedRole === "student"
-                  ? "bg-brand-cream text-brand-teal-950"
-                  : "text-brand-sage hover:text-brand-cream"
+                  ? "bg-brand-ink text-white"
+                  : "bg-white text-brand-ink-soft hover:text-brand-ink"
               }`}
             >
               I&apos;m a Student
@@ -73,10 +70,10 @@ export default function LoginPage() {
               type="button"
               onClick={() => setSelectedRole("landlord")}
               aria-pressed={selectedRole === "landlord"}
-              className={`rounded-full px-3 py-2 text-sm font-semibold transition-colors ${
+              className={`border-l border-brand-line px-3 py-2.5 text-sm font-semibold transition-colors ${
                 selectedRole === "landlord"
-                  ? "bg-brand-cream text-brand-teal-950"
-                  : "text-brand-sage hover:text-brand-cream"
+                  ? "bg-brand-ink text-white"
+                  : "bg-white text-brand-ink-soft hover:text-brand-ink"
               }`}
             >
               I&apos;m a Landlord
@@ -84,7 +81,7 @@ export default function LoginPage() {
           </div>
 
           <div className="mt-5 flex flex-col">
-            <label htmlFor="email" className="text-sm font-medium text-brand-cream">
+            <label htmlFor="email" className="text-sm font-medium text-brand-ink">
               Email
             </label>
             <input
@@ -94,12 +91,12 @@ export default function LoginPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="mt-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange"
+              className="mt-1.5 border border-brand-line bg-white px-4 py-2.5 text-sm text-brand-ink placeholder:text-brand-muted outline-none focus:border-brand-ink"
             />
           </div>
 
           <div className="mt-4 flex flex-col">
-            <label htmlFor="password" className="text-sm font-medium text-brand-cream">
+            <label htmlFor="password" className="text-sm font-medium text-brand-ink">
               Password
             </label>
             <input
@@ -109,20 +106,20 @@ export default function LoginPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
-              className="mt-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2.5 text-sm text-brand-cream placeholder:text-brand-sage-dim outline-none focus:border-brand-orange focus:ring-1 focus:ring-brand-orange"
+              className="mt-1.5 border border-brand-line bg-white px-4 py-2.5 text-sm text-brand-ink placeholder:text-brand-muted outline-none focus:border-brand-ink"
             />
           </div>
 
           <button
             type="submit"
-            className="mt-6 w-full rounded-full bg-brand-cream px-4 py-2.5 text-sm font-semibold text-brand-teal-950 transition-transform hover:scale-[1.02]"
+            className="mt-6 w-full bg-brand-orange px-4 py-2.5 text-sm font-semibold uppercase tracking-wide text-white transition-colors hover:bg-brand-orange-dark"
           >
             Log In
           </button>
 
-          <p className="mt-4 text-center text-xs text-brand-sage-dim">
+          <p className="mt-4 text-center text-xs text-brand-muted">
             Just exploring?{" "}
-            <Link href="/" className="text-brand-mint hover:underline">
+            <Link href="/" className="text-brand-green hover:underline">
               Browse without logging in
             </Link>
           </p>

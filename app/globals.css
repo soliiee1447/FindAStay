@@ -1,38 +1,37 @@
 @import "tailwindcss";
 
-/* FindAStay brand tokens. Namespaced under `brand-*` so they don't collide
-   with Tailwind's built-in palette — e.g. this generates bg-brand-orange,
-   text-brand-cream, border-brand-mint/30, etc. */
+/* FindAStay brand tokens — clean editorial e-commerce look: off-white base,
+   near-black ink for body text, orange for primary CTAs, green for
+   secondary actions. Namespaced under `brand-*` so it generates
+   bg-brand-ink, text-brand-orange, etc. Hover states use the *-dark
+   variant (a richer, darker shade) instead of an opacity fade, for a
+   crisp, high-contrast feel. */
 @theme inline {
-  --font-sans: var(--font-outfit);
+  --font-sans: var(--font-inter);
+  --font-serif: var(--font-playfair);
 
-  --color-brand-teal-950: #0f2e2b;
-  --color-brand-teal-900: #1a3d38;
-  --color-brand-teal-800: #24463f;
-  --color-brand-teal-700: #2f544c;
+  --color-brand-bg: #fafaf8;
+  --color-brand-surface: #f1f0ea;
+  --color-brand-line: #e4e2d9;
+
+  --color-brand-ink: #17171a;
+  --color-brand-ink-soft: #55534c;
+  --color-brand-muted: #8b897f;
 
   --color-brand-orange: #e8763c;
   --color-brand-orange-dark: #c85f2b;
+  --color-brand-orange-tint: #fbeae0;
 
-  --color-brand-mint: #3dd9c4;
-  --color-brand-mint-dark: #22b39f;
-
-  --color-brand-cream: #f5efe4;
-  --color-brand-sage: #b4c4b9;
-  --color-brand-sage-dim: #82988a;
+  --color-brand-green: #2d6a4f;
+  --color-brand-green-dark: #1f4d39;
+  --color-brand-green-tint: #e7f0ea;
 }
 
 body {
-  background-color: var(--color-brand-teal-950);
-  background-image:
-    radial-gradient(60% 50% at 100% 0%, rgb(232 118 60 / 28%), transparent 60%),
-    radial-gradient(55% 45% at 0% 100%, rgb(61 217 196 / 14%), transparent 60%),
-    linear-gradient(160deg, var(--color-brand-teal-950) 0%, var(--color-brand-teal-900) 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+  background-color: var(--color-brand-bg);
 }
 
 ::selection {
-  background-color: var(--color-brand-orange);
-  color: var(--color-brand-teal-950);
+  background-color: var(--color-brand-ink);
+  color: var(--color-brand-bg);
 }

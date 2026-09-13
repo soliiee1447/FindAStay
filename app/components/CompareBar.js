@@ -9,9 +9,9 @@ export default function CompareBar({ selected, onRemove, onClear }) {
   if (selected.length === 0) return null;
 
   return (
-    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-brand-teal-950/90 px-4 py-3 shadow-[0_-8px_24px_rgba(0,0,0,0.35)] backdrop-blur-md sm:px-6">
+    <div className="fixed inset-x-0 bottom-0 z-30 border-t border-brand-line bg-white px-4 py-3 shadow-[0_-4px_16px_rgba(0,0,0,0.06)] sm:px-6">
       <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-3">
-        <span className="text-sm font-medium text-brand-cream">
+        <span className="text-sm font-medium text-brand-ink">
           {selected.length}/{MAX_COMPARE} selected
         </span>
 
@@ -19,14 +19,14 @@ export default function CompareBar({ selected, onRemove, onClear }) {
           {selected.map((listing) => (
             <span
               key={listing.id}
-              className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 py-1 pl-3 pr-1.5 text-xs font-medium text-brand-cream"
+              className="flex items-center gap-1.5 border border-brand-line py-1 pl-3 pr-1.5 text-xs font-medium text-brand-ink"
             >
               {listing.title}
               <button
                 type="button"
                 onClick={() => onRemove(listing.id)}
                 aria-label={`Remove ${listing.title} from comparison`}
-                className="rounded-full p-0.5 text-brand-sage-dim hover:bg-white/10 hover:text-brand-cream"
+                className="p-0.5 text-brand-muted hover:text-brand-ink"
               >
                 <XIcon className="h-3 w-3" />
               </button>
@@ -38,19 +38,19 @@ export default function CompareBar({ selected, onRemove, onClear }) {
           <button
             type="button"
             onClick={onClear}
-            className="text-sm font-medium text-brand-sage hover:text-brand-cream"
+            className="text-sm font-medium text-brand-ink-soft hover:text-brand-ink"
           >
             Clear
           </button>
           {selected.length >= 2 ? (
             <Link
               href={`/compare?ids=${selected.map((l) => l.id).join(",")}`}
-              className="rounded-full bg-brand-cream px-4 py-2 text-sm font-semibold text-brand-teal-950 transition-transform hover:scale-105"
+              className="bg-brand-green px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-green-dark"
             >
               Compare
             </Link>
           ) : (
-            <span className="rounded-full bg-white/5 px-4 py-2 text-sm font-medium text-brand-sage-dim">
+            <span className="bg-brand-surface px-4 py-2 text-sm font-medium text-brand-muted">
               Pick 1 more
             </span>
           )}

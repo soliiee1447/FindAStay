@@ -22,7 +22,7 @@ export default async function ListingDetailPage({ params }) {
     <main className="mx-auto w-full max-w-5xl px-4 py-8 sm:py-10">
       <Link
         href="/"
-        className="inline-flex items-center gap-1 text-sm text-brand-sage hover:text-brand-cream"
+        className="inline-flex items-center gap-1 text-sm text-brand-ink-soft hover:text-brand-ink"
       >
         <ChevronLeftIcon className="h-4 w-4" />
         Back to listings
@@ -31,18 +31,18 @@ export default async function ListingDetailPage({ params }) {
       <div className="mt-4 flex flex-wrap items-start justify-between gap-3">
         <div>
           <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-2xl font-bold tracking-tight text-brand-cream sm:text-3xl">
+            <h1 className="font-serif text-3xl text-brand-ink sm:text-4xl">
               {listing.title}
             </h1>
             {listing.verified && <VerifiedBadge />}
           </div>
-          <p className="mt-1 text-brand-sage">
+          <p className="mt-1 text-brand-ink-soft">
             {listing.location} · {listing.walkMinutes} min walk to {listing.school}
           </p>
         </div>
-        <p className="text-2xl font-bold text-brand-cream">
+        <p className="text-2xl font-bold text-brand-ink">
           {formatPrice(listing.price)}
-          <span className="text-base font-normal text-brand-sage"> / month</span>
+          <span className="text-base font-normal text-brand-ink-soft"> / month</span>
         </p>
       </div>
 
@@ -52,32 +52,30 @@ export default async function ListingDetailPage({ params }) {
 
       <div className="mt-8 grid grid-cols-1 gap-8 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <div className="flex flex-wrap gap-6 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm backdrop-blur-sm">
-            <div className="flex items-center gap-2 text-brand-sage">
-              <BedIcon className="h-4 w-4 text-brand-mint" />
+          <div className="flex flex-wrap gap-6 border border-brand-line bg-white p-4 text-sm">
+            <div className="flex items-center gap-2 text-brand-ink-soft">
+              <BedIcon className="h-4 w-4 text-brand-green" />
               {listing.bedrooms} bedroom{listing.bedrooms > 1 ? "s" : ""}
             </div>
-            <div className="flex items-center gap-2 text-brand-sage">
-              <BathIcon className="h-4 w-4 text-brand-mint" />
+            <div className="flex items-center gap-2 text-brand-ink-soft">
+              <BathIcon className="h-4 w-4 text-brand-green" />
               {listing.bathrooms} bathroom{listing.bathrooms > 1 ? "s" : ""}
             </div>
-            <div className="flex items-center gap-2 text-brand-sage">
-              <RulerIcon className="h-4 w-4 text-brand-mint" />
+            <div className="flex items-center gap-2 text-brand-ink-soft">
+              <RulerIcon className="h-4 w-4 text-brand-green" />
               {listing.sqm} sqm
             </div>
           </div>
 
           <section className="mt-8">
-            <h2 className="text-lg font-bold tracking-tight text-brand-cream">
-              About this place
-            </h2>
-            <p className="mt-2 whitespace-pre-line leading-relaxed text-brand-sage">
+            <h2 className="font-serif text-xl text-brand-ink">About this place</h2>
+            <p className="mt-2 whitespace-pre-line leading-relaxed text-brand-ink-soft">
               {listing.description}
             </p>
           </section>
 
           <section className="mt-8">
-            <h2 className="text-lg font-bold tracking-tight text-brand-cream">Amenities</h2>
+            <h2 className="font-serif text-xl text-brand-ink">Amenities</h2>
             <div className="mt-3 flex flex-wrap gap-2">
               {listing.amenities.map((amenity) => (
                 <AmenityBadge key={amenity} name={amenity} size="md" />
@@ -86,7 +84,7 @@ export default async function ListingDetailPage({ params }) {
           </section>
 
           <section className="mt-8">
-            <h2 className="text-lg font-bold tracking-tight text-brand-cream">Location</h2>
+            <h2 className="font-serif text-xl text-brand-ink">Location</h2>
             <MapPlaceholder
               location={listing.location}
               school={listing.school}

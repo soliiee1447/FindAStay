@@ -26,14 +26,14 @@ export default function LandlordListingCard({ listing, status }) {
   const href = String(listing.id).startsWith("new-") ? null : `/listings/${listing.id}`;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
+    <div className="flex flex-col border border-brand-line bg-white">
       <CardLink href={href} className="block">
         <div className="relative aspect-[4/3] w-full">
           <PhotoPlaceholder seed={listing.gradient} className="h-full w-full" />
-          <div className="absolute left-2.5 top-2.5">
+          <div className="absolute left-0 top-0">
             <StatusTag status={status} />
           </div>
-          <div className="absolute bottom-2.5 left-2.5 rounded-full bg-brand-teal-950/70 px-2.5 py-1 text-xs font-medium text-brand-cream backdrop-blur-sm">
+          <div className="absolute bottom-2.5 left-2.5 bg-brand-ink px-2 py-1 text-xs font-medium text-white">
             {listing.walkMinutes} min walk to {listing.shortSchool}
           </div>
         </div>
@@ -41,18 +41,18 @@ export default function LandlordListingCard({ listing, status }) {
 
       <div className="flex flex-1 flex-col p-4">
         <CardLink href={href}>
-          <h3 className="font-semibold tracking-tight text-brand-cream">{listing.title}</h3>
-          <p className="mt-0.5 flex items-center gap-1 text-sm text-brand-sage">
+          <h3 className="font-semibold tracking-tight text-brand-ink">{listing.title}</h3>
+          <p className="mt-0.5 flex items-center gap-1 text-sm text-brand-ink-soft">
             <MapPinIcon className="h-3.5 w-3.5 shrink-0" />
             {listing.location}
           </p>
 
-          <p className="mt-2.5 text-lg font-bold text-brand-cream">
+          <p className="mt-2.5 text-lg font-bold text-brand-ink">
             {formatPrice(listing.price)}
-            <span className="text-sm font-normal text-brand-sage"> / month</span>
+            <span className="text-sm font-normal text-brand-ink-soft"> / month</span>
           </p>
 
-          <p className="mt-1 flex items-center gap-1 text-sm text-brand-sage">
+          <p className="mt-1 flex items-center gap-1 text-sm text-brand-ink-soft">
             <BedIcon className="h-3.5 w-3.5 shrink-0" />
             {listing.bedrooms} bd · {listing.bathrooms} ba · {listing.sqm} sqm
           </p>
@@ -62,7 +62,7 @@ export default function LandlordListingCard({ listing, status }) {
               <AmenityBadge key={amenity} name={amenity} />
             ))}
             {extraCount > 0 && (
-              <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-brand-sage-dim">
+              <span className="inline-flex items-center border border-brand-line px-2 py-1 text-xs text-brand-muted">
                 +{extraCount} more
               </span>
             )}
@@ -71,7 +71,7 @@ export default function LandlordListingCard({ listing, status }) {
 
         <button
           type="button"
-          className="mt-4 w-full rounded-full border border-white/15 py-2 text-sm font-semibold text-brand-cream transition-colors hover:border-brand-mint hover:text-brand-mint"
+          className="mt-4 w-full border border-brand-ink py-2 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-ink hover:text-white"
         >
           Edit listing
         </button>

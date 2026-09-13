@@ -31,28 +31,28 @@ export default async function ComparePage({ searchParams }) {
     <main className="mx-auto w-full max-w-4xl px-4 py-8 sm:py-10">
       <Link
         href="/"
-        className="inline-flex items-center gap-1 text-sm text-brand-sage hover:text-brand-cream"
+        className="inline-flex items-center gap-1 text-sm text-brand-ink-soft hover:text-brand-ink"
       >
         <ChevronLeftIcon className="h-4 w-4" />
         Back to listings
       </Link>
 
-      <h1 className="mt-3 text-2xl font-bold tracking-tight text-brand-cream sm:text-3xl">
+      <h1 className="mt-3 font-serif text-3xl text-brand-ink sm:text-4xl">
         Compare listings
       </h1>
 
       {listings.length < 2 ? (
-        <div className="mt-8 rounded-2xl border border-dashed border-white/15 py-16 text-center">
-          <p className="font-medium text-brand-cream">
+        <div className="mt-8 border border-dashed border-brand-line py-16 text-center">
+          <p className="font-medium text-brand-ink">
             Select 2 listings to compare.
           </p>
-          <p className="mt-1 text-sm text-brand-sage-dim">
+          <p className="mt-1 text-sm text-brand-muted">
             Head back to the listings page and tap &ldquo;Compare&rdquo; on
             the two you&apos;re deciding between.
           </p>
           <Link
             href="/"
-            className="mt-4 inline-block rounded-full bg-brand-cream px-5 py-2.5 text-sm font-semibold text-brand-teal-950"
+            className="mt-4 inline-block bg-brand-orange px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-brand-orange-dark"
           >
             Browse listings
           </Link>
@@ -70,7 +70,7 @@ function ComparisonBody({ listings, ids }) {
 
   return (
     <>
-      <p className="mt-1 text-sm text-brand-sage">
+      <p className="mt-1 text-sm text-brand-ink-soft">
         Here&apos;s how these two actually stack up, category by category.
       </p>
 
@@ -83,19 +83,19 @@ function ComparisonBody({ listings, ids }) {
               <Link
                 href={other ? `/compare?ids=${other}` : "/"}
                 aria-label={`Remove ${listing.title} from comparison`}
-                className="absolute right-2 top-2 z-10 rounded-full bg-brand-teal-950/70 p-1.5 text-brand-sage backdrop-blur-sm hover:text-brand-cream"
+                className="absolute right-2 top-2 z-10 bg-white p-1.5 text-brand-ink-soft shadow-sm hover:text-brand-ink"
               >
                 <XIcon className="h-3.5 w-3.5" />
               </Link>
               <Link href={`/listings/${listing.id}`} className="block">
-                <div className="aspect-video overflow-hidden rounded-xl">
+                <div className="aspect-video border border-brand-line">
                   <PhotoPlaceholder seed={listing.gradient} className="h-full w-full" />
                 </div>
-                <h2 className="mt-2 text-sm font-semibold text-brand-cream sm:text-base">
+                <h2 className="mt-2 text-sm font-semibold text-brand-ink sm:text-base">
                   {listing.title}
                 </h2>
               </Link>
-              <p className="text-xs text-brand-sage-dim">{listing.location}</p>
+              <p className="text-xs text-brand-muted">{listing.location}</p>
             </div>
           );
         })}
@@ -208,20 +208,17 @@ function ComparisonBody({ listings, ids }) {
       {/* Best-for callouts */}
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
         {listings.map((listing) => (
-          <div
-            key={listing.id}
-            className="rounded-2xl border border-white/10 bg-white/5 p-5 backdrop-blur-sm"
-          >
-            <span className="inline-flex items-center rounded-full bg-brand-orange/15 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-brand-orange ring-1 ring-brand-orange/30">
+          <div key={listing.id} className="border border-brand-line bg-white p-5">
+            <span className="inline-flex items-center bg-brand-orange-tint px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-brand-orange">
               {verdict.bestFor[listing.id]}
             </span>
             <Link
               href={`/listings/${listing.id}`}
-              className="mt-1 block font-semibold text-brand-cream hover:underline"
+              className="mt-2 block font-semibold text-brand-ink hover:underline"
             >
               {listing.title}
             </Link>
-            <p className="mt-1 text-sm text-brand-sage">
+            <p className="mt-1 text-sm text-brand-ink-soft">
               {formatPrice(listing.price)}/mo · {listing.walkMinutes} min to{" "}
               {listing.shortSchool}
             </p>
@@ -238,15 +235,15 @@ function VerdictRow({ label, a, b, tie, tieCaption, direction }) {
   const directionClass = direction === "down" ? "rotate-180" : "";
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 backdrop-blur-sm sm:p-5">
-      <p className="text-xs font-semibold uppercase tracking-wide text-brand-sage-dim">
+    <div className="border border-brand-line bg-white p-4 sm:p-5">
+      <p className="text-xs font-semibold uppercase tracking-wide text-brand-muted">
         {label}
       </p>
       <div className="mt-2 grid grid-cols-2 gap-3">
         <VerdictCell side={a} tie={tie} DirectionIcon={DirectionIcon} directionClass={directionClass} />
         <VerdictCell side={b} tie={tie} DirectionIcon={DirectionIcon} directionClass={directionClass} />
       </div>
-      {tie && <p className="mt-2 text-center text-xs text-brand-sage-dim">{tieCaption}</p>}
+      {tie && <p className="mt-2 text-center text-xs text-brand-muted">{tieCaption}</p>}
     </div>
   );
 }
@@ -256,28 +253,26 @@ function VerdictCell({ side, tie, DirectionIcon, directionClass }) {
 
   return (
     <div
-      className={`rounded-xl border p-3 ${
-        highlight
-          ? "border-brand-mint/40 bg-brand-mint/10"
-          : "border-white/10 bg-white/5"
+      className={`border p-3 ${
+        highlight ? "border-brand-green/40 bg-brand-green-tint" : "border-brand-line bg-brand-bg"
       }`}
     >
       <div className="flex items-center gap-1.5">
         {side.icon !== undefined ? (
           <CheckBadgeIcon
-            className={`h-4 w-4 ${side.icon ? "text-brand-mint" : "text-brand-sage-dim"}`}
+            className={`h-4 w-4 ${side.icon ? "text-brand-green" : "text-brand-muted"}`}
           />
         ) : highlight && DirectionIcon ? (
-          <DirectionIcon className={`h-4 w-4 text-brand-mint ${directionClass}`} />
+          <DirectionIcon className={`h-4 w-4 text-brand-green ${directionClass}`} />
         ) : tie ? (
-          <EqualsIcon className="h-4 w-4 text-brand-sage-dim" />
+          <EqualsIcon className="h-4 w-4 text-brand-muted" />
         ) : null}
-        <p className={`font-semibold ${highlight ? "text-brand-mint" : "text-brand-cream"}`}>
+        <p className={`font-semibold ${highlight ? "text-brand-green" : "text-brand-ink"}`}>
           {side.headline}
         </p>
       </div>
       {side.caption && (
-        <p className={`mt-1 text-xs ${highlight ? "text-brand-mint/80" : "text-brand-sage-dim"}`}>
+        <p className={`mt-1 text-xs ${highlight ? "text-brand-green/80" : "text-brand-muted"}`}>
           {side.caption}
         </p>
       )}
@@ -289,12 +284,12 @@ function VerdictCell({ side, tie, DirectionIcon, directionClass }) {
 function UniqueAmenities({ label, items }) {
   return (
     <div className="mt-2">
-      <p className="text-[10px] uppercase tracking-wide text-brand-sage-dim">{label}</p>
+      <p className="text-[10px] uppercase tracking-wide text-brand-muted">{label}</p>
       <div className="mt-1 flex flex-wrap gap-1">
         {items.map((item) => (
           <span
             key={item}
-            className="rounded-full border border-white/10 bg-white/5 px-2 py-0.5 text-[11px] text-brand-sage"
+            className="border border-brand-line bg-white px-2 py-0.5 text-[11px] text-brand-ink-soft"
           >
             {item}
           </span>

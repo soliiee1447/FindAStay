@@ -18,21 +18,19 @@ export default function ListingCard({
 
   return (
     <div
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-white/5 backdrop-blur-sm transition-all ${
-        selected
-          ? "border-brand-orange shadow-[0_0_0_1px_rgba(232,118,60,0.6)]"
-          : "border-white/10 hover:-translate-y-0.5 hover:border-white/20"
+      className={`group relative flex flex-col border bg-white transition-colors ${
+        selected ? "border-brand-ink" : "border-brand-line hover:border-brand-ink-soft"
       }`}
     >
       <Link href={`/listings/${listing.id}`} className="block">
         <div className="relative aspect-[4/3] w-full">
           <PhotoPlaceholder seed={listing.gradient} className="h-full w-full" />
           {listing.verified && (
-            <div className="absolute left-2.5 top-2.5">
+            <div className="absolute left-0 top-0">
               <VerifiedBadge size="sm" />
             </div>
           )}
-          <div className="absolute bottom-2.5 left-2.5 rounded-full bg-brand-teal-950/70 px-2.5 py-1 text-xs font-medium text-brand-cream backdrop-blur-sm">
+          <div className="absolute bottom-2.5 left-2.5 bg-brand-ink px-2 py-1 text-xs font-medium text-white">
             {listing.walkMinutes} min walk to {listing.shortSchool}
           </div>
         </div>
@@ -43,17 +41,17 @@ export default function ListingCard({
         onClick={() => onToggleCompare?.(listing.id)}
         disabled={compareDisabled}
         aria-pressed={selected}
-        className={`absolute right-2.5 top-2.5 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium shadow-sm ring-1 backdrop-blur-sm transition-colors ${
+        className={`absolute right-2.5 top-2.5 flex items-center gap-1.5 border bg-white px-2.5 py-1 text-xs font-medium transition-colors ${
           selected
-            ? "bg-brand-orange/15 text-brand-orange ring-brand-orange/60"
+            ? "border-brand-green text-brand-green"
             : compareDisabled
-              ? "cursor-not-allowed bg-brand-teal-950/50 text-brand-sage-dim ring-white/10"
-              : "bg-brand-teal-950/60 text-brand-cream ring-white/15 hover:bg-brand-teal-950/80"
+              ? "cursor-not-allowed border-brand-line text-brand-muted"
+              : "border-brand-line text-brand-ink-soft hover:border-brand-ink hover:text-brand-ink"
         }`}
       >
         <span
-          className={`flex h-3.5 w-3.5 items-center justify-center rounded-sm border ${
-            selected ? "border-brand-orange bg-brand-orange/20" : "border-brand-sage"
+          className={`flex h-3.5 w-3.5 items-center justify-center border ${
+            selected ? "border-brand-green bg-brand-green-tint" : "border-brand-ink-soft"
           }`}
         >
           {selected && (
@@ -66,18 +64,18 @@ export default function ListingCard({
       </button>
 
       <Link href={`/listings/${listing.id}`} className="flex flex-1 flex-col p-4">
-        <h3 className="font-semibold tracking-tight text-brand-cream">{listing.title}</h3>
-        <p className="mt-0.5 flex items-center gap-1 text-sm text-brand-sage">
+        <h3 className="font-semibold tracking-tight text-brand-ink">{listing.title}</h3>
+        <p className="mt-0.5 flex items-center gap-1 text-sm text-brand-ink-soft">
           <MapPinIcon className="h-3.5 w-3.5 shrink-0" />
           {listing.location}
         </p>
 
-        <p className="mt-2.5 text-lg font-bold text-brand-cream">
+        <p className="mt-2.5 text-lg font-bold text-brand-ink">
           {formatPrice(listing.price)}
-          <span className="text-sm font-normal text-brand-sage"> / month</span>
+          <span className="text-sm font-normal text-brand-ink-soft"> / month</span>
         </p>
 
-        <p className="mt-1 flex items-center gap-1 text-sm text-brand-sage">
+        <p className="mt-1 flex items-center gap-1 text-sm text-brand-ink-soft">
           <BedIcon className="h-3.5 w-3.5 shrink-0" />
           {listing.bedrooms} bd · {listing.bathrooms} ba · {listing.sqm} sqm
         </p>
@@ -87,7 +85,7 @@ export default function ListingCard({
             <AmenityBadge key={amenity} name={amenity} />
           ))}
           {extraCount > 0 && (
-            <span className="inline-flex items-center rounded-full border border-white/10 bg-white/5 px-2 py-1 text-xs text-brand-sage-dim">
+            <span className="inline-flex items-center border border-brand-line px-2 py-1 text-xs text-brand-muted">
               +{extraCount} more
             </span>
           )}

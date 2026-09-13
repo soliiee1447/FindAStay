@@ -1,15 +1,15 @@
-// Small pill for dashboard-only status ("Active" / "Pending Verification"),
-// distinct from the public VerifiedBadge — mint reads as "live and good",
-// orange reads as "needs attention", matching the rest of the brand system.
+// Small sharp-cornered tag for dashboard-only status ("Active" / "Pending
+// Verification") — green reads as "live and good", orange as "needs
+// attention", matching the rest of the brand's accent usage.
 export default function StatusTag({ status }) {
   const isActive = status === "Active" || status === "verified";
 
   return (
     <span
-      className={`inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold ${
+      className={`inline-flex items-center px-2 py-1 text-[11px] font-semibold uppercase tracking-wide ${
         isActive
-          ? "bg-brand-mint/15 text-brand-mint ring-1 ring-brand-mint/30"
-          : "bg-brand-orange/15 text-brand-orange ring-1 ring-brand-orange/30"
+          ? "bg-brand-green-tint text-brand-green"
+          : "bg-brand-orange-tint text-brand-orange"
       }`}
     >
       {status === "verified" ? "Verified" : status === "pending" ? "Pending" : status}
